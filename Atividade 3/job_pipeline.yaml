@@ -1,0 +1,24 @@
+resources:
+  jobs:
+    job_pipeline:
+      name: job_pipeline
+      tasks:
+        - task_key: 01_Bronze
+          notebook_task:
+            notebook_path: /Workspace/Users/emily.franco1304@gmail.com/Drafts/01_Ingestao_Bronze
+            source: WORKSPACE
+        - task_key: 02_Bronze_to_Silver
+          depends_on:
+            - task_key: 01_Bronze
+          notebook_task:
+            notebook_path: /Workspace/Users/emily.franco1304@gmail.com/Drafts/02_Bronze_to_Silver
+            source: WORKSPACE
+        - task_key: 03_Silver_to_Gold
+          depends_on:
+            - task_key: 02_Bronze_to_Silver
+          notebook_task:
+            notebook_path: /Workspace/Users/emily.franco1304@gmail.com/Drafts/03_Silver_to_Gold
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
